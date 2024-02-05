@@ -19,7 +19,7 @@ export const DataProvider = ({children}) => {
   // Load JSON Data
   useEffect(() => {
     fetch('quiz.json')
-      .then(res => res.json())
+      .then(res => res.json()) 
       .then(data => setQuizs(data))
   }, []);
 
