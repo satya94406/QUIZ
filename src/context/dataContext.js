@@ -3,7 +3,6 @@ import { createContext, useState, useEffect } from "react";
 const DataContext = createContext({});
 
 export const DataProvider = ({children}) => {
-      // All Quizs, Current Question, Index of Current Question, Answer, Selected Answer, Total Marks
   const [quizs, setQuizs] = useState([]);
   const [question, setQuesion] = useState({});
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -11,32 +10,27 @@ export const DataProvider = ({children}) => {
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [marks, setMarks] = useState(0);
 
-  // Display Controlling States
   const [showStart, setShowStart] = useState(true);
   const [showQuiz, setShowQuiz] = useState(false);
   const [showResult, setShowResult] = useState(false);
 
-  // Load JSON Data
   useEffect(() => {
     fetch('quiz.json')
       .then(res => res.json()) 
       .then(data => setQuizs(data))
   }, []);
 
-  // Set a Single Question
   useEffect(() => {
     if (quizs.length > questionIndex) {
       setQuesion(quizs[questionIndex]);
     }
   }, [quizs, questionIndex])
 
-  // Start Quiz
   const startQuiz = () => {
     setShowStart(false);
     setShowQuiz(true);
   }
 
-  // Check Answer
   const checkAnswer = (event, selected) => {
     if (!selectedAnswer) {
       setCorrectAnswer(question.answer);
@@ -51,7 +45,6 @@ export const DataProvider = ({children}) => {
     }
   }
 
-  // Next Quesion
   const nextQuestion = () => {
     setCorrectAnswer('');
     setSelectedAnswer('');
@@ -62,14 +55,12 @@ export const DataProvider = ({children}) => {
     setQuestionIndex(questionIndex + 1);
   }
 
-  // Show Result
   const showTheResult = () => {
     setShowResult(true);
     setShowStart(false);
     setShowQuiz(false);
   }
 
-  // Start Over
   const startOver = () => {
     setShowStart(false);
     setShowResult(false);

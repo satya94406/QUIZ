@@ -7,15 +7,9 @@ import { DataProvider } from './context/dataContext';
 function App() {
   return (
     <DataProvider>
-      {/* Welcome Page */}
       <Start/>
-
-      {/* Quiz Page */}
       <Quiz/>
-
-      {/* Result Page */}
       <Result/>
-
     </DataProvider>
   );
 }
